@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useEffect } from "react";
+import "./Pad.css";
 
 const pianoKit = [
   {
@@ -128,12 +129,25 @@ export function Pad({
       const key = e.key.toUpperCase();
       if (validKeys.includes(key)) {
         const audioElement = document.getElementById(key);
+        const pad = validKeys.indexOf(key)
+        console.log(pad)
+        document.getElementById(pad).classList.add('active')
         playAudio(audioElement);
       }
     };
+    const handleKeyup = (e) => {
+      const pad = validKeys.indexOf(e.key.toUpperCase());
+      setTimeout(() => { 
+        document.getElementById(pad).classList.remove('active');
+    }, 50);
+    };
+
     window.addEventListener("keydown", handleKeyboard);
+    window.addEventListener('keyup',handleKeyup)
+
     return () => {
       window.removeEventListener("keydown", handleKeyboard);
+      window.removeEventListener('keyup',handleKeyup)
     };
   }, [power, instrument, volume]);
 

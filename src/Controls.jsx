@@ -36,7 +36,7 @@ function Controls({
 
   return (
     <div id="controls">
-      <div id="power" onClick={changePower}>
+      <div id="power" onClick={changePower} style={{backgroundColor : power? 'green' : 'red'}}>
         Power Switch
       </div>
       <div id="display">{display}</div>
